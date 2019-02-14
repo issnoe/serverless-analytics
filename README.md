@@ -7,7 +7,7 @@ Example project and proof of concept for a personal [serverless](https://serverl
 
 ## Components
 
-After deploying the service you will have an HTTP endpoint using Amazon API Gateway that accepts requests and puts them into a Kinesis Stream. A Lambda function processes the stream and writes basic metrics about how many visitors you have per absolute URL to DynamoDB. 
+After deploying the service you will have an HTTP endpoint using Amazon API Gateway that accepts requests and puts them into a Kinesis Stream. A Lambda function processes the stream and writes basic metrics about how many visitors you have per absolute URL to DynamoDB.
 
 To access the tracked data, a basic dashboard with a JSON API is included as well. This should be a perfect starting point for you to create your own analytics service.
 
@@ -38,7 +38,7 @@ service: sls-analytics
 
 custom:
   names:
-    bucket: 
+    bucket:
       website: ${self:service}-website-example
       dashboard: ${self:service}-website-dashboard
     resource: track
@@ -60,16 +60,17 @@ The S3 Bucket configuration is only needed for the included example website and 
   AWS_SECRET_KEY=def456
 ```
 
-Deploy script uses [jq](https://stedolan.github.io/jq/) to read variables from generated output during deployment process. If you don't have jq installed, [download it here](https://stedolan.github.io/jq/download/). 
+Deploy script uses [jq](https://stedolan.github.io/jq/) to read variables from generated output during deployment process. If you don't have jq installed, [download it here](https://stedolan.github.io/jq/download/).
 
 Running `yarn deploy` will trigger a [serverless](https://serverless.com) deployment. After the output of your CloudFormation Stack is available, the included static websites will be generated *(using the hostname from the stack output)* and uploaded to the configured S3 buckets. As the last step, the deploy process will display the URLs of the example website and dashboard:
 
 ```bash
 # Install dependencies
 $ > yarn install
-# Deploy 
+# Deploy
 $ > yarn deploy
-
+# Local testing
+$ > open serverless-analytics/dist/**.html
 […]
 
 Dashboard:  http://sls-analytics-dashboard.s3-website-us-east-1.amazonaws.com/
@@ -173,6 +174,6 @@ Feel free to use the code, it's released using the [MIT license](LICENSE.md).
 
 ## Contribution
 
-You are welcome to contribute to this project! 😘 
+You are welcome to contribute to this project! 😘
 
 To make sure you have a pleasant experience, please read the [code of conduct](CODE_OF_CONDUCT.md). It outlines core values and beliefs and will make working together a happier experience.
